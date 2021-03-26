@@ -45,7 +45,7 @@ public class HW1 {
 	
 	private static void print_tree(Tree23<String, Integer> st) {
 		System.out.println("등록된 단어 수 = " + st.size());		
-		//System.out.println("트리의 깊이 = " + st.depth());
+		System.out.println("트리의 깊이 = " + st.depth());
 		
 		String maxKey = "";
 		int maxValue = 0;
@@ -63,7 +63,6 @@ class Tree23<K extends Comparable<K>, V> {
 	private K key1 = null, key2 = null;
 	private V value1 = null, value2 = null;
 	private int N = 0;
-	private int depth = 0;
 
 	private Tree23<K, V> left = null, middle = null, right = null;
 	private Tree23<K, V> parent = null;
@@ -76,7 +75,6 @@ class Tree23<K extends Comparable<K>, V> {
 			value1 = value;
 			root = this;
 			N++;
-			depth++;
 		} else {
 			if (tempNode.key2 == null) {
 				if (key.compareTo(tempNode.key1) < 0) {
@@ -181,6 +179,16 @@ class Tree23<K extends Comparable<K>, V> {
 			list.add(key2);
 		if (right != null)
 			right.inorder(list);
+	}
+
+	public int depth() {
+		int D = 0;
+		Tree23<K, V> tempNode = this;
+		while (tempNode != null) {
+			tempNode = tempNode.left;
+			D++;
+		}
+		return D;
 	}
 
 	public void combine(Tree23<K, V> node1, Tree23<K, V> node2) {
